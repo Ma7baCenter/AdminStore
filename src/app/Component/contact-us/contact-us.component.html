@@ -1,0 +1,30 @@
+<div class="contact-container">
+  <h2>📞 اتصل بنا</h2>
+
+  <!-- صورة المتجر -->
+  <div class="store-image">
+    <img [src]="storeImage" alt="صورة المتجر" />
+  </div>
+
+  <!-- معلومات الاتصال -->
+  <div class="contact-item">
+    <strong style="color: orangered;">صفحة الفيس بوك:</strong> <br>,
+    <a [href]="facebookPage" target="_blank" style="font-size: xx-small;">{{ facebookPage }}</a>
+  </div>
+
+  <div class="contact-item">
+    <strong style="color: orangered;">رقم الهاتف:  </strong> 
+    <span style="font-weight:700 ;color: #524e4e;">{{ phone }}</span>
+  </div>
+
+  <div class="contact-item">
+    <strong style="color: orangered;">العنوان:</strong><br>
+    <span style="font-weight:700 ;color: #524e4e;">{{ address }}</span>
+  </div>
+
+  <!-- QR Code -->
+  <div class="qr-code">
+    <p style="color: orangered;">📱 امسح QR للوصول إلى صفحتنا</p>
+    <img [src]="qrCodeImage" alt="QR Code" />
+  </div>
+</div>

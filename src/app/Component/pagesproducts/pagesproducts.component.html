@@ -1,0 +1,64 @@
+<div class="category-scroll-container">
+    <div *ngFor="let cat of catList" (click)="chooseCatID = cat.cat_Id; getSelCat()"
+      [class.selected]="chooseCatID === cat.cat_Id" class="cat-circle text-center">
+      <!-- <img [src]="cat.imageUrl" alt="{{ cat.namecat }}" /> -->
+      <img [src]="'https://ma7aba.bsite.net/Category/' + cat.img" alt="{{ cat.namecat }}" />
+      <div class="cat-name">{{ cat.namecat }}</div>
+    </div>
+  </div>
+
+<div class="card-body">
+  <div class="row mb-3">
+    <div class="col-12 col-md-4 mb-2">
+      <input type="text" class="form-control" [(ngModel)]="filterObj.item" placeholder="بحث بالاسم">
+       <div class="col-12 text-center">
+      <button class="btn btn-success btn-sm mt-2" (click)="filetrCandidates('')">بحث</button>
+    </div>
+    
+    
+    <!-- <div class="col-12 text-center">
+      <button class="btn btn-success btn-sm mt-2" (click)="filetrCandidates('')">بحث</button>
+    </div> -->
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover text-center">
+      <thead class="table-dark">
+        <tr>
+          <th>الاسم</th>
+          <th>السعر</th>
+          <th>تفاصيل</th>
+          <th>تعديل</th>
+          <th>حذف</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let pro of productslist">
+          <td>{{pro.name}}</td>
+          <td>{{pro.price}}</td>
+          <td>
+            <a class="btn btn-info btn-sm" [routerLink]="['/details/', pro.product_Id]">تفاصيل</a>
+          </td>
+          <td>
+            <a class="btn btn-warning btn-sm" [routerLink]="['/update/', pro.product_Id]">تعديل</a>
+          </td>
+          <td>
+            <button class="btn btn-danger btn-sm" (click)="delete(pro.product_Id)">حذف</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="row text-center mt-3">
+    <div class="col-4">
+      <button class="btn btn-warning">{{filterObj.pg}}</button>
+    </div>
+    <div class="col-4" *ngIf="filterObj.pg > 1">
+      <button class="btn btn-primary" (click)="onPrevious()">السابق</button>
+    </div>
+    <div class="col-4" *ngIf="productslist.length >= 8">
+      <button class="btn btn-success" (click)="onNext()">التالي</button>
+    </div>
+  </div>
+</div>

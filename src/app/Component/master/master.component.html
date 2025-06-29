@@ -1,0 +1,125 @@
+
+<div class="container">
+  <!-- Category Filter -->
+  <!-- <div class="row d-flex justify-content-center align-items-center mb-4 mt-3" >
+    <div class="col-12 col-md-4">
+      <select class="form-select" style="color: rgba(218, 72, 4, 0.932);" [(ngModel)]="chooseCatID" (change)="getSelCat()">
+        <option *ngFor="let cat of catList" [value]="cat.cat_Id" style="color: rgba(218, 72, 4, 0.932);">{{ cat.namecat }}</option>
+      </select>
+    </div>
+  </div> -->
+
+  <div class="category-scroll-container">
+    <div *ngFor="let cat of catList" (click)="chooseCatID = cat.cat_Id; getSelCat()"
+      [class.selected]="chooseCatID === cat.cat_Id" class="cat-circle text-center">
+      <!-- <img [src]="cat.imageUrl" alt="{{ cat.namecat }}" /> -->
+      <img [src]="'https://ma7aba.bsite.net/Category/' + cat.img" alt="{{ cat.namecat }}" />
+      <div class="cat-name">{{ cat.namecat }}</div>
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Cards Grid -->
+  <div class="row g-4 justify-content-center">
+    @for (Item of productslist; track Item.product_Id)
+    {
+    <div class="col-12 col-sm-10 col-md-6 col-lg-4 d-flex justify-content-center">
+      <div class="card mb-4" style="width: 100%; max-width: 20rem;">
+
+        @if (Item.images[0] == null)
+        {
+        <img style="width:100%;height:180px" src="/images/NoImage.png" class="card-img-top" alt="...">
+        }
+        @if (Item.images[0] != null)
+        {
+        <a [routerLink]="'/details/' + Item.product_Id">
+          <div  style="direction: rtl;">
+            <div style="direction: ltr; unicode-bidi: embed; text-align: left;">
+              <img *ngIf="Item.percent != null" src="assets/discount_22.svg" alt="Cart" style="width: 50px;">
+
+              <b *ngIf="Item.percent != null" style="color: white ; font-size: medium;background:red;text-decoration: none;"> {{ Item.percent }} %
+                off</b>
+
+            </div>
+            <img style="width: 100%; height: 180px" [src]="'https://ma7aba.bsite.net/Images/' + Item.images[0]"
+              class="card-img-top" [alt]="Item.name" />
+          </div>
+        </a>
+
+
+
+        }
+
+        <div class="card-body">
+          <h5 class="card-title">{{ Item.name }}</h5>
+          <p *ngIf="Item.content != null" class="card-text">
+            <b style="font-weight: 700;color: #000;">الوصف:  {{ Item.content }}</b> <br />
+          </p>
+
+          <p class="card-text">
+            <b  style="font-weight: 700;color: #000;">السعر : {{ Item.price }}</b>
+          </p>
+          <p class="card-text">
+            <b *ngIf="Item.priceBeforeDiscount != null" style="font-weight: 700;color: #000;" >السعر قبل الخصم : </b>
+              <span style="font-weight: 700;color: #000;" class="text-decoration-line-through">{{ Item.priceBeforeDiscount }}</span>
+
+          </p>
+
+
+           <p class="card-text">
+            <b *ngIf="Item.from != null" style="font-weight: 700;color: #000;" >تاريخ العرض: {{ Item.from | date:'dd/MM/yyyy' }}</b>
+              <span *ngIf="Item.from != null" style="color: rgb(255, 84, 5);">حتي نفاذ الكمية</span>
+
+          </p>
+
+          <!-- <div class="d-flex align-items-center mt-2" style="gap: 0.5rem;">
+            <b class="me-2">اللون:</b>
+            <div class="color-options d-flex">
+              <div *ngFor="let color of Item.colors" class="color-circle me-2" [ngStyle]="{
+                       'background-color': color,
+                       'border': selectedColor === color ? '2px solid black' : '1px solid #ccc'
+                     }" (click)="selectColor(color)" [title]="color">
+              </div>
+            </div>
+          </div> -->
+
+          <p *ngIf="Item.description != null" style="font-weight: 700;color: #000;" class="card-text" [ngClass]="{ 'description': expandedProductId !== Item.product_Id }"
+            (click)="toggleDescription(Item.product_Id)" style="cursor: pointer;"
+            [title]="expandedProductId === Item.product_Id ? '' : Item.description">
+            {{ Item.description }}
+          </p>
+
+          <div class="text-center">
+            <button type="button" class="btn btn-sm btn-success" style="background: rgba(245, 112, 3, 0.966);"
+              (click)="addtocart(Item)">
+              أضف إلى السلة
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Pagination -->
+  <div class="row justify-content-center my-4">
+    <div class="col-auto">
+      @if(productslist.length >= 8)
+      {
+      <a class="btn" style="background-color:  rgba(245, 112, 3, 0.966);color: white" (click)="onNext()">Next</a>
+      }
+    </div>
+    <div class="col-auto">
+      <a class="btn" style="background-color:  rgba(245, 112, 3, 0.966); color: white;">{{ filterObj.pg }}</a>
+    </div>
+    <div class="col-auto">
+      @if(filterObj.pg > 1)
+      {
+      <a class="btn" style="background-color:  rgba(245, 112, 3, 0.966); color: white;" (click)="onPrevious()">Prev</a>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="row">
+  <!-- Products Section -->
+  <div class="col-md-8">
+     <div class="d-flex align-items-center mb-3">
+    <!-- زر العودة -->
+    
+    <h1 class="text-danger mb-0" >كارت المشتريات</h1>
+
+    <button class="btn btn-outline-secondary me-5  bg-warning"    (click)="goBack()">
+  ← العودة
+</button>
+  </div>
+    <!-- <p class="lead">You have <strong>{{ cartProducts.length }}</strong> items in your cart</p> -->
+    <p class="lead">
+      <i class="fas fa-shopping-cart"></i>
+      تمتلك <strong>{{ cartProducts.length }}</strong> منتجًا في سلة التسوق
+    </p>
+    <div *ngFor="let item of cartProducts; let i = index" class="cart-item d-flex border-bottom p-3">
+      <img [src]="'https://localhost:44380/Images/' + item.images[0]" alt="product" width="100" height="100">
+      <div class="ms-3 flex-grow-1">
+        <h5>{{ item.name }}</h5>
+        <p class="text-muted">{{ item.price | currency: 'EGP' }}</p>
+        <div class="d-flex align-items-center">
+          <button class="btn btn-outline-dark btn-sm me-1" (click)="minsAmount(i)">-</button>
+          <!-- <input type="number" [(ngModel)]="item.quantity" (change)="detectChange()" class="form-control w-25 me-1"> -->
+          <input type="number" [(ngModel)]="item.quantity" (change)="detectChange()" class="form-control w-26 me-1">
+
+          <button class="btn btn-outline-dark btn-sm" (click)="addAmount(i)">+</button>
+        </div>
+        <button class="btn btn-link text-danger mt-2" (click)="deleteProduct(i)">مسح</button>
+      </div>
+      <div class="text-end">
+        <strong>{{ item.price * item.quantity }} EGP</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Section -->
+  <div class="col-md-4">
+    <div class="card p-3">
+      <h5>ملخص الطلب</h5>
+      <p>الاجمالي ({{ cartProducts.length }} منتجًا): <strong>{{ total | currency: 'EGP' }}</strong></p>
+      <!-- <button class="btn btn-warning w-100 mt-2">Proceed to Checkout</button> -->
+      <button class="btn btn-success w-100 mt-3" (click)="openOrderPopup()">طلب المشتريات</button>
+      <!-- <button class="btn btn-outline-danger w-100 mt-2" (click)="clearALLCart()">Clear Cart</button> -->
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Popup Overlay -->
+<div class="popup-overlay" *ngIf="showPopup">
+  <div class="popup-content card p-4 shadow">
+    <h5>إكمال الطلب</h5>
+    <form (ngSubmit)="submitOrder()" #orderForm="ngForm">
+      <div class="mb-2">
+        <label>رقم التليفون:</label>
+        <input type="text" class="form-control" placeholder="حقل مطلوب" [(ngModel)]="orderData.phone" name="phone"
+          required>
+      </div>
+      <div class="mb-2">
+        <label>الاسم :</label>
+        <input type="text" class="form-control" placeholder="حقل مطلوب" [(ngModel)]="orderData.name" name="address"
+          required>
+      </div>
+      <div class="mb-2">
+        <label>العنوان :</label>
+        <input type="text" class="form-control" placeholder="حقل مطلوب" [(ngModel)]="orderData.address" name="address"
+          required>
+      </div>
+      <div class="mb-2">
+        <label>البريد الإلكتروني:</label>
+        <input type="email" class="form-control" placeholder="اختياري" [(ngModel)]="orderData.email" name="email">
+      </div>
+      <div class="mb-2">
+        <label>ملاحظات:</label>
+        <textarea class="form-control" placeholder="اختياري" [(ngModel)]="orderData.notes" name="notes"></textarea>
+      </div>
+
+      <div class="text-end">
+        <button type="submit" class="btn btn-success me-2" [disabled]="!orderForm.form.valid">إرسال الطلب</button>
+        <!-- <textarea class="form-control" *ngIf="this.success"   name="تم إرسال الطلب بنجاح!"></textarea> -->
+        <button type="button" class="btn btn-secondary" (click)="closePopup()">إلغاء</button>
+      </div>
+    </form>
+  </div>
+</div>

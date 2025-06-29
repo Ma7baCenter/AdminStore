@@ -1,0 +1,62 @@
+.cart-item {
+    display: flex;
+    align-items: center;
+  }
+  .cart-item img {
+    object-fit: cover;
+    border: 1px solid #ddd;
+  }
+  
+
+  .popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+  .popup-content {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    border-radius: 8px;
+  }
+  
+
+  .quantity-input {
+  width: 80px !important; /* يمكن تعديل القياس حسب الحاجة */
+  display: inline-block;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  appearance: textfield; /* يخفي أسهم الزيادة/النقصان في بعض المتصفحات */
+}
+
+/* لإصلاح ظهور الأسهم في متصفحات معينة */
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.back-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #f8f9fa;
+  transform: translateX(-3px);
+}

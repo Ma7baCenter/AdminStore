@@ -1,0 +1,15 @@
+<div *ngFor="let order of orders" class="order">
+  <h3>{{ order.name }} </h3>
+  <h3>{{ order.serial }}</h3>
+  <p>📞 {{ order.phone }} </p>
+  <p> 🏠 {{ order.address }}</p>
+  <p>🗓️ {{ order.orderDate }} </p>
+  <p>🗓️  💵 Total Price: {{ order.totalPrice }}</p>
+
+  <ul>
+    <li *ngFor="let item of order.productItem">
+      🧺 {{ item.name }} - Quantity: {{ item.quantity }} - Price: {{ item.price }}
+    </li>
+  </ul>
+  <hr>
+</div>

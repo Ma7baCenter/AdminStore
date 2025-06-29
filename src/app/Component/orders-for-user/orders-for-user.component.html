@@ -1,0 +1,26 @@
+<div class="order-cardinfo">
+<div class="order-info">
+    <p>🧑 الاسم: {{ orders[0].name }}</p>
+    <p>📞 الهاتف: {{ orders[0].phone }}</p>
+    <p>📍 العنوان: {{ orders[0].address }}</p>
+</div>
+</div>
+<div *ngFor="let order of orders" class="order-card">
+
+  <div class="order-info">
+    <p>🔹 رقم الطلب: {{ order.serial }}</p>
+    <p>🕒 تاريخ الطلب: {{ order.orderDate }}</p>
+    <p>📦 عدد المنتجات: {{ order.totalItems }}</p>
+    <p>🔢 إجمالي الكمية: {{ order.totalQuantity }}</p>
+    <p>💰 السعر الكلي: {{ order.totalPrice }} جنيه</p>
+  </div>
+
+  <div class="products">
+    <h4>🛒 المنتجات:</h4>
+    <div class="product" *ngFor="let product of order.products">
+      <p>🔹 الاسم: {{ product.name }}</p>
+      <p>🔸 الكمية: {{ product.quantity }}</p>
+      <p>💵 السعر: {{ product.price }} جنيه</p>
+    </div>
+  </div>
+</div>

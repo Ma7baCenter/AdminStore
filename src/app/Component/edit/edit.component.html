@@ -1,0 +1,81 @@
+
+<div class="container mt-4">
+  <!-- عنوان المنتج -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">{{ product.name }}</h2>
+
+    <button class="btn btn-outline-secondary bg-warning" (click)="goBack()">
+      العودة ←
+    </button>
+  </div>
+
+  <div class="row">
+    <!-- الصور -->
+    <div class="col-md-6">
+      <div id="productCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div *ngFor="let img of product.images; let i = index" class="carousel-item" [class.active]="i === 0">
+            <img [src]="'https://ma7aba.bsite.net/Images/' + img" class="d-block w-100" alt="product image">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- معلومات المنتج -->
+    <div class="col-md-6">
+      <h4 *ngIf="product.description != null">الوصف:</h4>
+      <!-- <p>{{ product.description }}</p> -->
+      <p *ngIf="product.description != null" [ngClass]="{'description': expandedProductId !== product.product_Id}"
+        (click)="toggleDescription(product.product_Id)" style="cursor: pointer;"
+        [title]="expandedProductId === product.product_Id ? '' : product.description">
+        <b> </b>{{product.description}}
+      </p>
+
+      <h4 *ngIf="product.content != null">التفاصيل:</h4>
+      <p *ngIf="product.content != null">{{ product.content }}</p>
+
+      <h4 *ngIf="product.price != null">السعر:</h4>
+      <p *ngIf="product.price != null">{{ product.price | currency:'EGP' }}</p>
+
+      <h4>القسم:</h4>
+      <p>{{ product.cat_Name }}</p>
+
+      <!-- <h4>المُورِّد:</h4>
+        <p>{{ product.sub_Name }}</p> -->
+
+      <!-- ألوان متاحة -->
+      <!-- <h4>الألوان المتاحة:</h4>
+        <div class="d-flex gap-2 mb-3">
+          <div 
+            *ngFor="let color of product.colors"
+            [ngStyle]="{'background-color': color}"
+            class="rounded-circle"
+            style="width: 30px; height: 30px; border: 1px solid #ccc;">
+          </div>
+        </div> -->
+
+      <!-- زر الإضافة للسلة -->
+      <div class="text-center">
+        <button type="button" class="btn btn-sm btn-success" style="background: rgba(245, 112, 3, 0.966);"
+          (click)="addtocart(product)">
+          أضف إلى السلة
+        </button>
+      </div>
+    </div>
+
+    <!-- فيديو يوتيوب -->
+    <div *ngIf="product.youtubeLink  != null" class="mt-4">
+      <h4>الفيديو التعريفي:</h4>
+      <div class="ratio ratio-16x9">
+        <iframe [src]="getSafeYoutubeLink(product.youtubeLink)" title="YouTube video" allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+  <br>
