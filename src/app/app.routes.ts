@@ -17,7 +17,7 @@ export const routes: Routes = [
    // {path: '', redirectTo: '/products', pathMatch: 'full'},
     {path: 'add', component:AddproductComponent},
     {path: 'products', component:MasterComponent},
-    {path: 'catagory', component:CatagorylistComponent},
+    {path: 'category', component:CatagorylistComponent},
     {path:"details/:id" , component:EditComponent},
     {path:"card" , component:CartComponent},
     {path:"adding" , component:AddingproductComponent},
