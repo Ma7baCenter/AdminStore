@@ -29,7 +29,7 @@ export class UpdateCategoryComponent {
   }
 
   loadCategory(): void {
-    this.http.get<any>(`https://ma7aba.bsite.net/api/Cataegory/${this.categoryId}`)
+    this.http.get<any>(`https://ma7aba.bsite.net/api/Cataegory/getbyid/${this.categoryId}`)
       .subscribe({
         next: (data) => {
           this.Namecat = data.namecat;
