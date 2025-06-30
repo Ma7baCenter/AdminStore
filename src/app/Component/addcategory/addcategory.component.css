@@ -1,0 +1,13 @@
+.color-chips .badge {
+  font-size: 1em;
+  padding: 0.5em 0.75em;
+}
+
+.btn-close {
+  font-size: 0.75em;
+  padding: 0.25em;
+}
+
+.list-group-item {
+  margin-bottom: 0.5rem;
+}

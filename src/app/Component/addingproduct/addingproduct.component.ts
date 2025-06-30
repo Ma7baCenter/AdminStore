@@ -24,7 +24,7 @@ export class AddingproductComponent {
     Category_Id:1,
     Supplier_Id: 1,
     Images: [],
-     PriceBeforeDiscount: 0,
+    PriceBeforeDiscount: 0,
     From: '',
     To: '',
   };
@@ -110,7 +110,7 @@ ngOnInit(): void {
       next: (response) => {
 
         alert('Product added successfully!');
-        this.router.navigate(['/master']);
+        this.router.navigate(['/products']);
       },
       error: (err) => {
         console.error('Error adding product:', err);

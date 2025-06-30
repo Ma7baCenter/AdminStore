@@ -10,7 +10,7 @@ export class AddService {
   
  private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
  //private apiUrl = 'https://localhost:7201/api/Products'; // تأكد من صحة الرابط
-
+private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
   constructor(private http: HttpClient) { }
 
   createProduct(productData: CreateProductDto): Observable<ProductResponse> {
@@ -44,6 +44,21 @@ export class AddService {
 
     return this.http.post<ProductResponse>(this.apiUrl, formData);
   }
+
+
+createcat(productData: any): Observable<any> {
+    const formData = new FormData();
+    
+    formData.append('Namecat', productData.Namecat);
+    
+    
+ if (productData.Image && productData.Image.length > 0) {
+    formData.append('Image', productData.Image[0]); // send only the first file
+  }   
+
+    return this.http.post<ProductResponse>(this.apiUrl22, formData);
+  }
+
 
   getProduct(id: number): Observable<ProductResponse> {
     return this.http.get<ProductResponse>(`${this.apiUrl}/${id}`);

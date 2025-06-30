@@ -1,0 +1,20 @@
+<h2>Update Category</h2>
+
+<form (ngSubmit)="updateCategory()">
+  <div>
+    <label>Name:</label>
+    <input type="text" [(ngModel)]="Namecat" name="name" required />
+  </div>
+
+  <div>
+    <label>New Image:</label>
+    <input type="file" (change)="onFileChange($event)" accept="image/*" />
+  </div>
+
+  <div *ngIf="previewUrl">
+    <p>Image Preview:</p>
+    <img [src]="previewUrl" width="150" height="auto" />
+  </div>
+
+  <button type="submit">Update</button>
+</form>

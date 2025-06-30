@@ -4,7 +4,6 @@
       <thead class="table-dark">
         <tr>
           <th>الاسم</th>
-          <th>تفاصيل</th>
           <th>تعديل</th>
           <th>حذف</th>
         </tr>
@@ -12,11 +11,9 @@
       <tbody>
         <tr *ngFor="let pro of catagorylist">
           <td>{{pro.namecat}}</td>
+          
           <td>
-            <a class="btn btn-info btn-sm" [routerLink]="['/details/', pro.cat_Id]">تفاصيل</a>
-          </td>
-          <td>
-            <a class="btn btn-warning btn-sm" [routerLink]="['/update/', pro.cat_Id]">تعديل</a>
+            <a class="btn btn-warning btn-sm" [routerLink]="['/updatecat/', pro.cat_Id]">تعديل</a>
           </td>
           <td>
             <button class="btn btn-danger btn-sm" (click)="delete(pro.cat_Id)">حذف</button>

@@ -10,6 +10,8 @@ import { ContactUsComponent } from './Component/contact-us/contact-us.component'
 import { OrdersListComponent } from './Component/orders-list/orders-list.component';
 import { UpdateProductComponent } from './Component/update-product/update-product.component';
 import { PagesproductsComponent } from './Component/pagesproducts/pagesproducts.component';
+import { AddcategoryComponent } from './Component/addcategory/addcategory.component';
+import { UpdateCategoryComponent } from './Component/update-category/update-category.component';
 
 export const routes: Routes = [
    // {path: '', redirectTo: '/products', pathMatch: 'full'},
@@ -24,6 +26,8 @@ export const routes: Routes = [
     { path: 'orders', component: OrdersListComponent },
     { path: 'update/:id', component: UpdateProductComponent },
     { path: 'pages', component: PagesproductsComponent },
+    { path: 'addcat', component: AddcategoryComponent },
+    { path: 'updatecat/:id', component: UpdateCategoryComponent },
 
 { path: '', redirectTo: '/products', pathMatch: 'full' },
 ];

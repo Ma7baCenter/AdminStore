@@ -1,59 +1,15 @@
 <div class="container mt-5">
-  <h2 class="text-center" style="color: orangered;">اضافة منتج جديد</h2>
+  <h2 class="text-center" style="color: orangered;">اضافة قسم جديد</h2>
   <form (ngSubmit)="onSubmit()" enctype="multipart/form-data">
     <div class="mb-3">
       <label for="name" class="form-label" style="font-size: x-large;font-weight: 700;">اسم المنتج</label>
-      <input type="text" class="form-control" id="name" [(ngModel)]="product.Name" name="name" required>
+      <input type="text" class="form-control" id="name" [(ngModel)]="category.Namecat" name="Namecat" required>
     </div>
 
-    <div class="mb-3">
-      <label for="price" class="form-label" style="font-size: x-large;font-weight: 700;">السعر</label>
-      <input type="number" class="form-control" id="price" [(ngModel)]="product.Price" name="price" required
-        step="0.01">
-    </div>
-
+   
     
 
-    <div class="mb-3">
-      <label for="description" class="form-label" style="font-size: x-large;font-weight: 700;">الوصف</label>
-      <textarea class="form-control" id="description" [(ngModel)]="product.Description" name="description"
-        rows="3"></textarea>
-    </div>
-
-    <div class="mb-3">
-      <label for="content" class="form-label" style="font-size: x-large;font-weight: 700;">المحتوي</label>
-      <textarea class="form-control" id="content" [(ngModel)]="product.Content" name="content" rows="3"></textarea>
-    </div>
-
-    <!-- <div class="mb-3">
-      <label for="category_Id" class="form-label">Category ID</label>
-      <input type="number" class="form-control" id="category_Id" [(ngModel)]="product.Category_Id" name="category_Id"
-        required>
-    </div> -->
-    <div class="mb-3">
-            <label for="fromDate" class="form-label">الاقسام</label>
-      <select class="form-select" style="color: rgba(218, 72, 4, 0.932);font-size: x-large;font-weight: 700;" [(ngModel)]="product.Category_Id" name="Category_Id"
- >
-        <option *ngFor="let cat of catList" [value]="cat.cat_Id" style="color: rgba(218, 72, 4, 0.932);">{{ cat.namecat }}</option>
-      </select>
-    </div>
-
-    <div class="mb-3">
-      <label for="priceBeforeDiscount" class="form-label" style="font-size: x-large;font-weight: 700;">السعر قبل الخصم</label>
-      <input type="number" class="form-control" id="priceBeforeDiscount" [(ngModel)]="product.PriceBeforeDiscount"
-        name="priceBeforeDiscount" step="0.01">
-    </div>
-
-    <div class="mb-3">
-      <label for="fromDate" class="form-label" style="font-size: x-large;font-weight: 700;">تاريخ بداية العرض</label>
-      <input type="date" class="form-control" id="fromDate" [(ngModel)]="product.From" name="fromDate">
-    </div>
-
-    <div class="mb-3">
-      <label for="toDate" class="form-label" style="font-size: x-large;font-weight: 700;">تاريخ نهاية العرض</label>
-      <input type="date" class="form-control" id="toDate" [(ngModel)]="product.To" name="toDate">
-    </div>
-
+   
     <!-- Percent will be calculated automatically -->
 
     <!-- <div class="mb-3">
@@ -89,7 +45,7 @@
 
 
 <div class="mb-3">
-  <label for="images" class="form-label" style="font-size: x-large;font-weight: 700;">صور المنتج</label>
+  <label for="images" class="form-label" style="font-size: x-large;font-weight: 700;">صور القسم</label>
   
   <!-- زر تحميل الصور الأساسي -->
   <input type="file" class="form-control" id="images" 
@@ -136,11 +92,8 @@
   </div>
 </div>
 
-<div class="mb-3">
-      <label for="youtubeLink" class="form-label" style="font-size: x-large;font-weight: 700;">YouTube Link (Optional)</label>
-      <input type="url" class="form-control" id="youtubeLink" [(ngModel)]="product.YoutubeLink" name="youtubeLink">
-    </div>
 
-    <button type="submit" class="btn btn-primary" style="font-size: x-large;font-weight: 700;">اضافة المنتج</button>
+
+    <button type="submit" class="btn btn-primary" style="font-size: x-large;font-weight: 700;">اضافة قسم</button>
   </form>
 </div>
