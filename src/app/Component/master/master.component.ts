@@ -82,6 +82,8 @@ export class MasterComponent {
         // إضافة خيار "All Categories" إذا لم يكن موجوداً
         if (!this.catList.some((c) => c.cat_Id === 0)) {
           this.catList.unshift({ cat_Id: 0, namecat: 'كل المنتجات' ,img:"554.jpg"});
+           this.catList.unshift({ cat_Id: 1000, namecat: ' العروض' ,img:"offer.png"});
+
         }
       },
       error: (err) => console.error('Failed to load categories', err),

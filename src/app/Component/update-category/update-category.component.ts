@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-update-category',
@@ -20,7 +21,9 @@ export class UpdateCategoryComponent {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router ,
+    private location: Location ,
+
   ) {}
 
   ngOnInit(): void {
@@ -60,7 +63,7 @@ export class UpdateCategoryComponent {
       formData.append('files', this.selectedFile); // ASP.NET will look in Request.Form.Files
     }
 
-    this.http.post(`https://ma7aba.bsite.net/api/Cataegory/UpdateCategory/${this.categoryId}`, formData)
+    this.http.post(`https://localhost:44380/api/Cataegory/UpdateCategory/${this.categoryId}`, formData)
       .subscribe({
         next: () => {
           alert('Category updated successfully');
@@ -71,5 +74,8 @@ export class UpdateCategoryComponent {
           alert('Error updating category');
         }
       });
+  }
+   goBack(): void {
+    this.location.back();
   }
 }
