@@ -16,22 +16,38 @@
       تمتلك <strong>{{ cartProducts.length }}</strong> منتجًا في سلة التسوق
     </p>
     <div *ngFor="let item of cartProducts; let i = index" class="cart-item d-flex border-bottom p-3">
-      <img [src]="'https://localhost:44380/Images/' + item.images[0]" alt="product" width="100" height="100">
+      <img [src]="'https://ma7aba.bsite.net/Images/' + item.images[0]" alt="product" width="100" height="100">
       <div class="ms-3 flex-grow-1">
         <h5>{{ item.name }}</h5>
         <p class="text-muted">{{ item.price | currency: 'EGP' }}</p>
         <div class="d-flex align-items-center">
           <button class="btn btn-outline-dark btn-sm me-1" (click)="minsAmount(i)">-</button>
           <!-- <input type="number" [(ngModel)]="item.quantity" (change)="detectChange()" class="form-control w-25 me-1"> -->
-          <input type="number" [(ngModel)]="item.quantity" (change)="detectChange()" class="form-control w-26 me-1">
+          <input *ngIf="item.flagWeight == false" type="number" [(ngModel)]="item.quantity" (change)="detectChange()" class="form-control w-26 me-1">
+          <input *ngIf="item.flagWeight == true" type="number" [(ngModel)]="item.netWeight"  (change)="detectChange()" class="form-control w-26 me-1" >
+            <span *ngIf="item.flagWeight == true" class="input-group-text">جرام</span>
+
 
           <button class="btn btn-outline-dark btn-sm" (click)="addAmount(i)">+</button>
         </div>
+
+
+
+
+
         <button class="btn btn-link text-danger mt-2" (click)="deleteProduct(i)">مسح</button>
+        
       </div>
+      
+
+
+
       <div class="text-end">
         <strong>{{ item.price * item.quantity }} EGP</strong>
       </div>
+
+
+      
     </div>
   </div>
 

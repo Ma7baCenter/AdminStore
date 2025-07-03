@@ -9,7 +9,9 @@
   <ul>
     <li *ngFor="let item of order.productItem">
       🧺 {{ item.name }} - Quantity: {{ item.quantity }} - Price: {{ item.price }}
-    </li>
+ <span *ngIf="item.netWeight > 0">
+     الوزن: {{ item.netWeight }} g
+  </span>    </li>
   </ul>
   <hr>
 </div>

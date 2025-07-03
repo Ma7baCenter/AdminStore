@@ -14,6 +14,8 @@ export interface CreateProductDto {
    PriceBeforeDiscount?: number,
    From?: Date,
   To?: Date,
+  FlagWeight :boolean,
+   NetWeight:number,
   Images: File[];
 }
 

@@ -28,8 +28,9 @@ export class MasterComponent {
   };
   cartProducts: Iproduct[] = [];
   maount: number = 1;
-  selectedColor: string = '';
+ // selectedColor: string = '';
   quantity: number = 1;
+  weight: number = 125;
   catfortest!: Icatagory;
   expandedProductId: number | null = null;
 
@@ -97,7 +98,9 @@ export class MasterComponent {
     const productWithColor: Iproduct = {
       ...event,
       //selectedColor: this.selectedColor,
-      quantity: this.quantity,
+      quantity: this.quantity
+      //  ...(event.flagWeight ? { weight: this.weight } : {})
+
     };
 
     // Load cart from localStorage if it exists

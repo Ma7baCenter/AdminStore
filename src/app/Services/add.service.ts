@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 })
 export class AddService {
   
- private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
- //private apiUrl = 'https://localhost:7201/api/Products'; // تأكد من صحة الرابط
+// private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
+ private apiUrl = 'https://localhost:44380/api/Products'; // تأكد من صحة الرابط
 private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
   constructor(private http: HttpClient) { }
 
@@ -31,9 +31,14 @@ private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
       formData.append('To', this.formatDate(productData.To));
     }
 
+  
+
+
     formData.append('Category_Id', productData.Category_Id.toString());
     formData.append('Supplier_Id', (productData.Supplier_Id || 1).toString());
-    
+    formData.append('NetWeight', (productData.NetWeight).toString());
+    formData.append('FlagWeight', productData.FlagWeight ? 'true' : 'false');
+
     // productData.Colors.forEach((color, index) => {
     //   formData.append(`Colors[${index}]`, color);
     // });
@@ -56,7 +61,7 @@ createcat(productData: any): Observable<any> {
     formData.append('Image', productData.Image[0]); // send only the first file
   }   
 
-    return this.http.post<ProductResponse>(this.apiUrl22, formData);
+    return this.http.post<ProductResponse>(this.apiUrl, formData);
   }
 
 

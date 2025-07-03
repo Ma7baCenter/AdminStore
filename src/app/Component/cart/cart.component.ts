@@ -53,11 +53,23 @@ export class CartComponent {
 
   addAmount(index: number) {
     this.cartProducts[index].quantity++;
+    console.log(this.cartProducts[index].weight);
+
+    if(this.cartProducts[index].flagWeight == true)
+      {
+this.cartProducts[index].netWeight = this.cartProducts[index].netWeight * 2;
+console.log(this.cartProducts[index].weight);
+      }
     this.getCartTotal();
     localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
   }
   minsAmount(index: number) {
     this.cartProducts[index].quantity--;
+    if(this.cartProducts[index].flagWeight == true)
+      {
+this.cartProducts[index].netWeight = this.cartProducts[index].netWeight / 2;
+console.log(this.cartProducts[index].weight);
+      }
     this.getCartTotal();
     localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
   }
@@ -139,6 +151,7 @@ export class CartComponent {
         name: item.name,
         quantity: item.quantity,
         price: item.price,
+        netWeight : item.netWeight
        // selectedColor: item.selectedColor,
       })),
     };

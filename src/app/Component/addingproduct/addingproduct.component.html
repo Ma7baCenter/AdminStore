@@ -38,6 +38,22 @@
       </select>
     </div>
 
+<div class="mb-3">
+  <label for="flagWeight" class="form-label" style="font-size: x-large; font-weight: 700;">قابل للتجزئة</label>
+  <select class="form-select" id="flagWeight" [(ngModel)]="product.FlagWeight" name="FlagWeight">
+    <option [ngValue]="true">نعم</option>
+    <option [ngValue]="false">لا</option>
+  </select>
+</div>
+
+<div class="mb-3">
+      <label for="netWeight" class="form-label" style="font-size: x-large;font-weight: 700;"> الوزن</label>
+      <input type="number" class="form-control" id="netWeight" [(ngModel)]="product.NetWeight"
+        name="netWeight" step="0.01">
+    </div>
+
+
+
     <div class="mb-3">
       <label for="priceBeforeDiscount" class="form-label" style="font-size: x-large;font-weight: 700;">السعر قبل الخصم</label>
       <input type="number" class="form-control" id="priceBeforeDiscount" [(ngModel)]="product.PriceBeforeDiscount"

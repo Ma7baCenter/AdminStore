@@ -8,6 +8,7 @@ import { Iproduct } from '../../Moduels/iproduct';
 import { ProductsService } from '../../Services/product.service';
 import { from } from 'rxjs';
 import { Location } from '@angular/common';
+import { Icatagory } from '../../Moduels/icatagory';
 
 @Component({
   selector: 'app-update-product',
@@ -23,6 +24,7 @@ export class UpdateProductComponent implements OnInit {
   imagePreviews: string[] = [];
   prdID: number = 0;
   isLoading = true;
+  catList: Icatagory[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -30,9 +32,11 @@ export class UpdateProductComponent implements OnInit {
     private route: ActivatedRoute,
     private productService: ProductsService,
         private location: Location ,
+
   ) {}
 
   ngOnInit() {
+     this.loadCategories();
     this.prdID = Number(this.route.snapshot.paramMap.get('id'));
     
     // Initialize empty form first
@@ -65,6 +69,8 @@ export class UpdateProductComponent implements OnInit {
       priceBeforeDiscount :[''],
       youtubeLink :[''],
       cat_Id :[''],
+      flagWeight :[''],
+      netWeight:['0'],
       images: this.fb.array([])
     });
   }
@@ -82,6 +88,8 @@ export class UpdateProductComponent implements OnInit {
         youtubeLink: this.product.youtubeLink,
         from: this.product.from,
         to: this.product.to,
+        flagWeight : this.product.flagWeight,
+        netWeight : this.product.netWeight
       });
 
       // Clear existing images
@@ -164,6 +172,8 @@ const formatNullable = (value: any, type: 'number' | 'date' = 'number') => {
   formData.append('priceBeforeDiscount', formatNullable(value.priceBeforeDiscount));
   formData.append('youtubeLink', value.youtubeLink ?? '');
   formData.append('cat_Id', value.cat_Id.toString());
+  formData.append('flagWeight', value.flagWeight ? 'true' : 'false');
+ formData.append('netWeight', value.netWeight .toString());
 
   this.selectedFiles.forEach((file) => {
     formData.append('images', file);
@@ -178,6 +188,7 @@ console.log('Form values before sending:', this.productForm.value);
     
     headers: {
       // لا تحدد Content-Type يدويًا لـ FormData، سيقوم Angular بتعيينه تلقائيًا مع boundary
+     // this.http.post(`https://ma7aba.bsite.net/api/Product/UpdateProduct/${this.prdID}`
     },
 
 
@@ -193,4 +204,18 @@ console.log('Form values before sending:', this.productForm.value);
    goBack(): void {
     this.location.back();
   }
+
+  loadCategories(): void {
+    this.productService.getallcat().subscribe({
+      next: (categories) => {
+        this.catList = categories;
+        // إضافة خيار "All Categories" إذا لم يكن موجوداً
+        // if (!this.catList.some((c) => c.cat_Id === 0)) {
+        //   this.catList.unshift({ cat_Id: 0, namecat: 'كل المنتجات' ,img:"554.jpg"});
+        // }
+      },
+      error: (err) => console.error('Failed to load categories', err),
+    });
+  }
+
 }

@@ -27,6 +27,8 @@ export class AddingproductComponent {
     PriceBeforeDiscount: 0,
     From: '',
     To: '',
+    FlagWeight :'',
+    NetWeight : 0
   };
  selectedFiles: { file: File, preview: string }[] = [];
   maxFiles = 10; // Set maximum number of files allowed
