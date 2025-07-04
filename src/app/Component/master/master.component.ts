@@ -48,20 +48,20 @@ export class MasterComponent {
 
   ngOnInit(): void {
     this.loadCategories();
-    this.filterProducts();
+    this.filterProducts('');
   }
   onPrevious() {
     if (this.filterObj.pg > 1) {
       this.filterObj.pg--;
-      this.filterProducts();
+      this.filterProducts('');
     }
   }
   onNext() {
     this.filterObj.pg++;
-    this.filterProducts();
+    this.filterProducts('');
   }
 
-  filterProducts(): void {
+  filterProducts(hany:any): void {
     this.filterObj.catagorgsId = this.chooseCatID;
 
     this.httpclient
@@ -92,7 +92,7 @@ export class MasterComponent {
   }
   getSelCat(): void {
     this.filterObj.pg = 1; // إعادة تعيين الصفحة إلى 1
-    this.filterProducts();
+    this.filterProducts('');
   }
   addtocart(event: Iproduct) {
     const productWithColor: Iproduct = {

@@ -18,7 +18,18 @@
     </div>
   </div>
 
-
+<div style="margin: 10px 10px;">
+      <input
+  type="text"
+  class="form-control"
+  [(ngModel)]="filterObj.item"
+  (keyup)="filterProducts(filterObj.item)"
+  placeholder="بحث بالاسم">
+    
+    <!-- <div class="col-12 text-center">
+      <button class="btn btn-success btn-sm mt-2" (click)="filetrCandidates('')">بحث</button>
+    </div> -->
+  </div>
 
 
 

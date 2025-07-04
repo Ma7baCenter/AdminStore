@@ -11,13 +11,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrdersListComponent implements OnInit {
 orders: any[] = [];
-
+ filterObj = {
+    pg: 1
+  };
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-    this.http.get<any[]>('https://ma7aba.bsite.net/api/Order/AllOrdersForAdmin')
+    this.http.get<any[]>(`https://ma7aba.bsite.net/api/Order/AllOrdersForAdmin22?pg=${this.filterObj.pg}`)
       .subscribe((data) => {
         this.orders = data;
       });
   }
+
+   onPrevious() {
+    if (this.filterObj.pg > 1) {
+      this.filterObj.pg--;
+      this.filterProducts();
+    }
+  }
+  onNext() {
+    this.filterObj.pg++;
+    this.filterProducts();
+  }
+   filterProducts(): void {
+       this.http.get<any[]>(`https://ma7aba.bsite.net/api/Order/AllOrdersForAdmin22?pg=${this.filterObj.pg}`)
+      .subscribe((data) => {
+        this.orders = data;
+      }
+  )}
 }

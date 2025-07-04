@@ -7,14 +7,20 @@
     </div>
   </div>
 
-<div class="card-body">
+<!-- <div class="card-body">
   <div class="row mb-3">
     <div class="col-12 col-md-4 mb-2">
       <input type="text" class="form-control" [(ngModel)]="filterObj.item" placeholder="بحث بالاسم">
        <div class="col-12 text-center">
       <button class="btn btn-success btn-sm mt-2" (click)="filetrCandidates('')">بحث</button>
-    </div>
-    
+    </div> -->
+<div style="margin: 10px 10px;">
+      <input
+  type="text"
+  class="form-control"
+  [(ngModel)]="filterObj.item"
+  (keyup)="filetrCandidates(filterObj.item)"
+  placeholder="بحث بالاسم">
     
     <!-- <div class="col-12 text-center">
       <button class="btn btn-success btn-sm mt-2" (click)="filetrCandidates('')">بحث</button>
@@ -61,4 +67,3 @@
       <button class="btn btn-success" (click)="onNext()">التالي</button>
     </div>
   </div>
-</div>

@@ -83,12 +83,14 @@ export class EditComponent implements OnInit {
       } else {
         this.cartProducts.push(productWithColor);
         this.cartService.addToCart(productWithColor);
+        this.toastr.success(' المنتج تم اضافته الي سلة المشتريات ');
         localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
       }
     } else {
       // First item being added to the cart
       this.cartProducts.push(productWithColor);
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+     this.toastr.success(' المنتج تم اضافته الي سلة المشتريات ');
       this.cartService.addToCart(productWithColor);
     }
   }
