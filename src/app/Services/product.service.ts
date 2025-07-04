@@ -161,7 +161,7 @@ export class ProductsService implements OnInit {
 
  deletecat(prdID: number): Observable<any> {
     return this.httpclient
-      .delete<any>(`https://ma7aba.bsite.net/api/Cataegory/Delete/${prdID} `)
+      .delete<any>(`https://ma7aba.bsite.net/api/Cataegory/Delete/${prdID}`)
       .pipe(retry(2), catchError(this.handleError));
   }
 

@@ -63,7 +63,7 @@ export class UpdateCategoryComponent {
       formData.append('files', this.selectedFile); // ASP.NET will look in Request.Form.Files
     }
 
-    this.http.post(`https://localhost:44380/api/Cataegory/UpdateCategory/${this.categoryId}`, formData)
+    this.http.post(`https://ma7aba.bsite.net/api/Cataegory/UpdateCategory/${this.categoryId}`, formData)
       .subscribe({
         next: () => {
           alert('Category updated successfully');
