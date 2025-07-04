@@ -29,5 +29,5 @@ export const routes: Routes = [
     { path: 'addcat', component: AddcategoryComponent },
     { path: 'updatecat/:id', component: UpdateCategoryComponent },
 
-{ path: '', redirectTo: '/products', pathMatch: 'full' },
+{ path: '', redirectTo: '/products'},
 ];

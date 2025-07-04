@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AddService {
   
 // private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
- //private apiUrl = 'https://localhost:44380/api/Products'; // تأكد من صحة الرابط
+ private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
 private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
   constructor(private http: HttpClient) { }
 
@@ -47,7 +47,7 @@ private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
       formData.append(`Images`, image, image.name);
     });
 
-    return this.http.post<ProductResponse>(this.apiUrl22, formData);
+    return this.http.post<ProductResponse>(this.apiUrl, formData);
   }
 
 
