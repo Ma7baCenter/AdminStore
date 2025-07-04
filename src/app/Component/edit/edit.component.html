@@ -15,9 +15,10 @@
       <div id="productCarousel" class="carousel slide mb-3" data-bs-ride="carousel">
         <div class="carousel-inner">
           <div *ngFor="let img of product.images; let i = index" class="carousel-item" [class.active]="i === 0">
-            <img [src]="'https://ma7aba.bsite.net/Images/' + img" class="d-block w-100" alt="product image">
+            <img  [src]="'https://ma7aba.bsite.net/Images/' + img" class="d-block w-100" alt="product image">
           </div>
-        </div>
+
+           
         <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon"></span>
         </button>

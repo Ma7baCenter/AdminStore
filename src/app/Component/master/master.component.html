@@ -42,7 +42,10 @@
 
         @if (Item.images[0] == null)
         {
-        <img style="width:100%;height:180px" src="/images/NoImage.png" class="card-img-top" alt="...">
+                      <a [routerLink]="'/details/' + Item.product_Id">
+
+        <img style="width:100%;height:180px" src="assets/ma7aba.jpg" class="card-img-top" alt="...">
+        </a>
         }
         @if (Item.images[0] != null)
         {
