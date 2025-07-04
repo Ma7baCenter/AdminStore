@@ -47,7 +47,7 @@ private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
       formData.append(`Images`, image, image.name);
     });
 
-    return this.http.post<ProductResponse>(this.apiUrl, formData);
+    return this.http.post<ProductResponse>(this.apiUrl22, formData);
   }
 
 
