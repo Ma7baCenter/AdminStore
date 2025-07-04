@@ -60,6 +60,7 @@ export class EditComponent implements OnInit {
       ...event,
       //selectedColor: this.selectedColor,
       quantity: this.quantity,
+           ...(event.flagWeight ? { weight: event.netWeight } : {})
     };
 
     // Load cart from localStorage if it exists

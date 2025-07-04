@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class AddService {
   
 // private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
- private apiUrl = 'https://localhost:44380/api/Products'; // تأكد من صحة الرابط
+ //private apiUrl = 'https://localhost:44380/api/Products'; // تأكد من صحة الرابط
 private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
   constructor(private http: HttpClient) { }
 
@@ -61,12 +61,12 @@ createcat(productData: any): Observable<any> {
     formData.append('Image', productData.Image[0]); // send only the first file
   }   
 
-    return this.http.post<ProductResponse>(this.apiUrl, formData);
+    return this.http.post<ProductResponse>(this.apiUrl22, formData);
   }
 
 
   getProduct(id: number): Observable<ProductResponse> {
-    return this.http.get<ProductResponse>(`${this.apiUrl}/${id}`);
+    return this.http.get<ProductResponse>(`${this.apiUrl22}/${id}`);
   }
 
 
