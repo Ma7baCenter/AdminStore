@@ -19,6 +19,7 @@ export class EditComponent implements OnInit {
   expandedProductId: number | null = null;
   quantity: number = 1;
   cartProducts: Iproduct[] = [];
+  weight: number = 0;
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -60,7 +61,7 @@ export class EditComponent implements OnInit {
       ...event,
       //selectedColor: this.selectedColor,
       quantity: this.quantity,
-           ...(event.flagWeight ? { weight: event.netWeight } : {})
+       ...(event.flagWeight ? { weight: event.netWeight } : {})
     };
 
     // Load cart from localStorage if it exists
