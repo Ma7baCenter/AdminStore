@@ -66,7 +66,7 @@ export class MasterComponent {
 
     this.httpclient
       .get<Iproduct[]>(
-        `https://ma7aba.bsite.net/api/Product/Num?catagorgsId=${this.filterObj.catagorgsId}&suppliersId=${this.filterObj.suppliersId}&pg=${this.filterObj.pg}&item=${this.filterObj.item}`
+        `https://ma7aba.bsite.net/api/Product/Num?catagorgsId=${this.filterObj.catagorgsId}&suppliersId=${this.filterObj.suppliersId}&pg=${this.filterObj.pg}&item=${this.filterObj.item}&t=${Date.now()}`
       )
       .subscribe({
         next: (res) => {
