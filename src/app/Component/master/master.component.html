@@ -1,4 +1,3 @@
-
 <div class="container">
   <!-- Category Filter -->
   <!-- <div class="row d-flex justify-content-center align-items-center mb-4 mt-3" >
@@ -13,105 +12,58 @@
     <div *ngFor="let cat of catList" (click)="chooseCatID = cat.cat_Id; getSelCat()"
       [class.selected]="chooseCatID === cat.cat_Id" class="cat-circle text-center">
       <!-- <img [src]="cat.imageUrl" alt="{{ cat.namecat }}" /> -->
-      <img [src]="'https://ma7aba.bsite.net/Category/' + cat.img" alt="{{ cat.namecat }}" />
+      <img [src]="'https://mahabamarket.bsite.net/Category/' + cat.img" alt="{{ cat.namecat }}" />
       <div class="cat-name">{{ cat.namecat }}</div>
     </div>
   </div>
 
-<div style="margin: 10px 10px;">
-      <input
-  type="text"
-  class="form-control"
-  [(ngModel)]="filterObj.item"
-  (keyup)="filterProducts(filterObj.item)"
-  placeholder="بحث بالاسم">
-    
-    <!-- <div class="col-12 text-center">
-      <button class="btn btn-success btn-sm mt-2" (click)="filetrCandidates('')">بحث</button>
-    </div> -->
+  <div class="search-section">
+    <div class="search-box">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="form-control search-input" [(ngModel)]="filterObj.item"
+        (keyup)="filterProducts(filterObj.item)" placeholder="بحث بالاسم...">
+    </div>
   </div>
 
 
 
   <!-- Cards Grid -->
-  <div class="row g-4 justify-content-center">
+  <div class="row g-2 g-md-3 justify-content-center">
     @for (Item of productslist; track Item.product_Id)
     {
-    <div class="col-12 col-sm-10 col-md-6 col-lg-4 d-flex justify-content-center">
-      <div class="card mb-4" style="width: 100%; max-width: 20rem;">
+    <div class="col-6 col-md-4 col-lg-3 d-flex justify-content-center">
+      <div class="card" style="width: 100%; max-width: 20rem;">
 
-        @if (Item.images[0] == null)
-        {
-                      <a [routerLink]="'/details/' + Item.product_Id">
-
-        <img style="width:100%;height:180px" src="assets/ma7aba.jpg" class="card-img-top" alt="...">
-        </a>
-        }
-        @if (Item.images[0] != null)
-        {
-        <a [routerLink]="'/details/' + Item.product_Id">
-          <div  style="direction: rtl;">
-            <div style="direction: ltr; unicode-bidi: embed; text-align: left;">
-              <img *ngIf="Item.percent != null" src="assets/discount_22.svg" alt="Cart" style="width: 50px;">
-
-              <b *ngIf="Item.percent != null" style="color: white ; font-size: medium;background:red;text-decoration: none;"> {{ Item.percent }} %
-                off</b>
-
-            </div>
-            <img style="width: 100%; height: 180px" [src]="'https://ma7aba.bsite.net/Images/' + Item.images[0]"
+        <a [routerLink]="'/details/' + Item.product_Id" class="card-image-wrapper">
+          <div class="image-container">
+            <!-- Product Image -->
+            <img
+              [src]="Item.images[0] ? 'https://mahabamarket.bsite.net/Images/' + Item.images[0] : 'assets/ma7aba.jpg'"
               class="card-img-top" [alt]="Item.name" />
-          </div>
-        </a>
 
+            <!-- Top Overlay: Discount -->
+            <div class="card-overlay-top" *ngIf="Item.percent != null">
+              <span class="discount-badge">{{ Item.percent }}% OFF</span>
+            </div>
 
-
-        }
-
-        <div class="card-body">
-          <h5 class="card-title">{{ Item.name }}</h5>
-          <p *ngIf="Item.content != null" class="card-text">
-            <b style="font-weight: 700;color: #000;">الوصف:  {{ Item.content }}</b> <br />
-          </p>
-
-          <p class="card-text">
-            <b  style="font-weight: 700;color: #000;">السعر : {{ Item.price }}</b>
-          </p>
-          <p class="card-text">
-            <b *ngIf="Item.priceBeforeDiscount != null" style="font-weight: 700;color: #000;" >السعر قبل الخصم : </b>
-              <span style="font-weight: 700;color: #000;" class="text-decoration-line-through">{{ Item.priceBeforeDiscount }}</span>
-
-          </p>
-
-
-           <p class="card-text">
-            <b *ngIf="Item.from != null" style="font-weight: 700;color: #000;" >تاريخ العرض: {{ Item.from | date:'dd/MM/yyyy' }}</b>
-              <span *ngIf="Item.from != null" style="color: rgb(255, 84, 5);">حتي نفاذ الكمية</span>
-
-          </p>
-
-          <!-- <div class="d-flex align-items-center mt-2" style="gap: 0.5rem;">
-            <b class="me-2">اللون:</b>
-            <div class="color-options d-flex">
-              <div *ngFor="let color of Item.colors" class="color-circle me-2" [ngStyle]="{
-                       'background-color': color,
-                       'border': selectedColor === color ? '2px solid black' : '1px solid #ccc'
-                     }" (click)="selectColor(color)" [title]="color">
+            <!-- Bottom Overlay: Name & Price -->
+            <div class="card-overlay-bottom">
+              <h5 class="card-title-overlay">{{ Item.name }}</h5>
+              <div class="price-container">
+                <span class="price-tag-overlay">{{ Item.price }} ج.م</span>
+                <span *ngIf="Item.priceBeforeDiscount != null" class="old-price-overlay">
+                  {{ Item.priceBeforeDiscount }}
+                </span>
               </div>
             </div>
-          </div> -->
-
-          <p *ngIf="Item.description != null" style="font-weight: 700;color: #000;" class="card-text" [ngClass]="{ 'description': expandedProductId !== Item.product_Id }"
-            (click)="toggleDescription(Item.product_Id)" style="cursor: pointer;"
-            [title]="expandedProductId === Item.product_Id ? '' : Item.description">
-            {{ Item.description }}
-          </p>
-
-          <div class="text-center">
-            <button type="button" class="btn btn-sm btn-success" style="background: rgba(245, 112, 3, 0.966);"
-              (click)="addtocart(Item)">
-              أضف إلى السلة
-            </button>
           </div>
+        </a>
+
+        <!-- Mini Footer: Add to Cart only -->
+        <div class="card-footer-mini">
+          <button type="button" class="btn-add-mini" (click)="addtocart(Item)">
+            أضف للسلة
+          </button>
         </div>
       </div>
     </div>

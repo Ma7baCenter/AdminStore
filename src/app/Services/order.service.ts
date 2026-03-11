@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrderService {
-  private baseUrl = 'https://ma7aba.bsite.net/api/Order'; 
+  private baseUrl = 'https://mahabamarket.bsite.net/api/Order';
   //private baseUrl22 = 'https://localhost:44380/api/Order'; 
-  constructor(private http: HttpClient )   { }
+  constructor(private http: HttpClient) { }
 
   sendOrder(orderData: any) {
     return this.http.post(this.baseUrl, orderData);
-    
+
   }
 }

@@ -2,7 +2,7 @@
     <div *ngFor="let cat of catList" (click)="chooseCatID = cat.cat_Id; getSelCat()"
       [class.selected]="chooseCatID === cat.cat_Id" class="cat-circle text-center">
       <!-- <img [src]="cat.imageUrl" alt="{{ cat.namecat }}" /> -->
-      <img [src]="'https://ma7aba.bsite.net/Category/' + cat.img" alt="{{ cat.namecat }}" />
+      <img [src]="'https://mahabamarket.bsite.net/Category/' + cat.img" alt="{{ cat.namecat }}" />
       <div class="cat-name">{{ cat.namecat }}</div>
     </div>
   </div>

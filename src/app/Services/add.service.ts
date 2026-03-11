@@ -7,21 +7,21 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AddService {
-  
- //private apiUrl = 'https://localhost:44380/api/Products'; // تأكد من صحة الرابط
- private apiUrl = 'https://ma7aba.bsite.net/api/Products'; // تأكد من صحة الرابط
-private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
+
+  //private apiUrl = 'https://localhost:44380/api/Products'; // تأكد من صحة الرابط
+  private apiUrl = 'https://mahabamarket.bsite.net/api/Products'; // تأكد من صحة الرابط
+  private apiUrl22 = 'https://mahabamarket.bsite.net/api/Cataegory/adding';
   constructor(private http: HttpClient) { }
 
   createProduct(productData: CreateProductDto): Observable<ProductResponse> {
     const formData = new FormData();
-    
+
     formData.append('Name', productData.Name);
     formData.append('Price', productData.Price.toString());
     if (productData.YoutubeLink) formData.append('YoutubeLink', productData.YoutubeLink);
     if (productData.Description) formData.append('Description', productData.Description);
     if (productData.Content) formData.append('Content', productData.Content);
-   this.appendIfExists(formData, 'PriceBeforeDiscount', productData.PriceBeforeDiscount?.toString());
+    this.appendIfExists(formData, 'PriceBeforeDiscount', productData.PriceBeforeDiscount?.toString());
 
     // Handle dates properly
     if (productData.From) {
@@ -31,7 +31,7 @@ private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
       formData.append('To', this.formatDate(productData.To));
     }
 
-  
+
 
 
     formData.append('Category_Id', productData.Category_Id.toString());
@@ -42,7 +42,7 @@ private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
     // productData.Colors.forEach((color, index) => {
     //   formData.append(`Colors[${index}]`, color);
     // });
-    
+
     productData.Images.forEach((image, index) => {
       formData.append(`Images`, image, image.name);
     });
@@ -51,15 +51,15 @@ private apiUrl22 = 'https://ma7aba.bsite.net/api/Cataegory/adding';
   }
 
 
-createcat(productData: any): Observable<any> {
+  createcat(productData: any): Observable<any> {
     const formData = new FormData();
-    
+
     formData.append('Namecat', productData.Namecat);
-    
-    
- if (productData.Image && productData.Image.length > 0) {
-    formData.append('Image', productData.Image[0]); // send only the first file
-  }   
+
+
+    if (productData.Image && productData.Image.length > 0) {
+      formData.append('Image', productData.Image[0]); // send only the first file
+    }
 
     return this.http.post<ProductResponse>(this.apiUrl22, formData);
   }
@@ -70,7 +70,7 @@ createcat(productData: any): Observable<any> {
   }
 
 
-private appendIfExists(formData: FormData, key: string, value: any): void {
+  private appendIfExists(formData: FormData, key: string, value: any): void {
     if (value !== undefined && value !== null) {
       formData.append(key, value);
     }

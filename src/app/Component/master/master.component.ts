@@ -13,7 +13,7 @@ import { ToastrService, ToastrModule } from 'ngx-toastr';
 @Component({
   selector: 'app-master',
   standalone: true,
-  imports: [FormsModule, CommonModule, ToastrModule ,RouterLink],
+  imports: [FormsModule, CommonModule, ToastrModule, RouterLink],
   templateUrl: './master.component.html',
   styleUrl: './master.component.css',
 })
@@ -28,7 +28,7 @@ export class MasterComponent {
   };
   cartProducts: Iproduct[] = [];
   maount: number = 1;
- // selectedColor: string = '';
+  // selectedColor: string = '';
   quantity: number = 1;
   weight: number = 0;
   catfortest!: Icatagory;
@@ -44,7 +44,7 @@ export class MasterComponent {
     private prdservices: ProductsService,
     private cartService: CartService,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -61,12 +61,12 @@ export class MasterComponent {
     this.filterProducts('');
   }
 
-  filterProducts(hany:any): void {
+  filterProducts(hany: any): void {
     this.filterObj.catagorgsId = this.chooseCatID;
 
     this.httpclient
       .get<Iproduct[]>(
-        `https://ma7aba.bsite.net/api/Product/Num?catagorgsId=${this.filterObj.catagorgsId}&suppliersId=${this.filterObj.suppliersId}&pg=${this.filterObj.pg}&item=${this.filterObj.item}&t=${Date.now()}`
+        `https://mahabamarket.bsite.net/api/Product/Num?catagorgsId=${this.filterObj.catagorgsId}&suppliersId=${this.filterObj.suppliersId}&pg=${this.filterObj.pg}&item=${this.filterObj.item}&t=${Date.now()}`
       )
       .subscribe({
         next: (res) => {
@@ -82,8 +82,8 @@ export class MasterComponent {
         this.catList = categories;
         // إضافة خيار "All Categories" إذا لم يكن موجوداً
         if (!this.catList.some((c) => c.cat_Id === 0)) {
-          this.catList.unshift({ cat_Id: 0, namecat: 'كل المنتجات' ,img:"554.jpg"});
-           this.catList.unshift({ cat_Id: 1000, namecat: ' العروض' ,img:"offer.png"});
+          this.catList.unshift({ cat_Id: 0, namecat: 'كل المنتجات', img: "554.jpg" });
+          this.catList.unshift({ cat_Id: 1000, namecat: ' العروض', img: "offer.png" });
 
         }
       },
@@ -99,7 +99,7 @@ export class MasterComponent {
       ...event,
       //selectedColor: this.selectedColor,
       quantity: this.quantity,
-     ...(event.flagWeight ? { weight: event.netWeight } : {})
+      ...(event.flagWeight ? { weight: event.netWeight } : {})
     };
 
     // Load cart from localStorage if it exists
@@ -109,14 +109,14 @@ export class MasterComponent {
       // Check for existence of the same product with same color
       const exist = this.cartProducts.find(
         (item) =>
-          item.product_Id === productWithColor.product_Id 
+          item.product_Id === productWithColor.product_Id
         // &&
         //   item.selectedColor === productWithColor.selectedColor
       );
 
       if (exist) {
         //alert('هذا المنتج مضاف بالفعل في سلة المشتريات ');
-                this.toastr.success(' المنتج مضاف بالفعل في سلة المشتريات ');
+        this.toastr.success(' المنتج مضاف بالفعل في سلة المشتريات ');
 
       } else {
         this.cartProducts.push(productWithColor);

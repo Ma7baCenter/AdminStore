@@ -31,17 +31,17 @@ export class UpdateProductComponent implements OnInit {
     private http: HttpClient,
     private route: ActivatedRoute,
     private productService: ProductsService,
-        private location: Location ,
+    private location: Location,
 
-  ) {}
+  ) { }
 
   ngOnInit() {
-     this.loadCategories();
+    this.loadCategories();
     this.prdID = Number(this.route.snapshot.paramMap.get('id'));
-    
+
     // Initialize empty form first
     this.initializeForm();
-    
+
     // Then load product data
     this.productService.getProductByID(this.prdID).subscribe({
       next: (data) => {
@@ -63,14 +63,14 @@ export class UpdateProductComponent implements OnInit {
       name: [''],
       description: [''],
       price: [''],
-      content :[''],
-      from :[''],
-      to :[''],
-      priceBeforeDiscount :[''],
-      youtubeLink :[''],
-      cat_Id :[''],
-      flagWeight :[''],
-      netWeight:['0'],
+      content: [''],
+      from: [''],
+      to: [''],
+      priceBeforeDiscount: [''],
+      youtubeLink: [''],
+      cat_Id: [''],
+      flagWeight: [''],
+      netWeight: ['0'],
       images: this.fb.array([])
     });
   }
@@ -88,8 +88,8 @@ export class UpdateProductComponent implements OnInit {
         youtubeLink: this.product.youtubeLink,
         from: this.product.from,
         to: this.product.to,
-        flagWeight : this.product.flagWeight,
-        netWeight : this.product.netWeight
+        flagWeight: this.product.flagWeight,
+        netWeight: this.product.netWeight
       });
 
       // Clear existing images
@@ -139,13 +139,13 @@ export class UpdateProductComponent implements OnInit {
 
 
   getImageSrc(path: string): string {
-  // إذا كانت Base64 أو DataURL (للصور الجديدة)
-  if (path.startsWith('data:image')) {
-    return path;
+    // إذا كانت Base64 أو DataURL (للصور الجديدة)
+    if (path.startsWith('data:image')) {
+      return path;
+    }
+    // إذا كانت اسم صورة من السيرفر
+    return `https://mahabamarket.bsite.net/Images/${path}`;
   }
-  // إذا كانت اسم صورة من السيرفر
-  return `https://ma7aba.bsite.net/Images/${path}`;
-}
 
 
   onSubmit() {
@@ -153,55 +153,55 @@ export class UpdateProductComponent implements OnInit {
       alert('Please fill all required fields');
       return;
     }
-const formatNullable = (value: any, type: 'number' | 'date' = 'number') => {
-  if (!value) return '';
-  if (type === 'date') return new Date(value).toISOString();
-  return value.toString();
-};
-   const formData = new FormData();
+    const formatNullable = (value: any, type: 'number' | 'date' = 'number') => {
+      if (!value) return '';
+      if (type === 'date') return new Date(value).toISOString();
+      return value.toString();
+    };
+    const formData = new FormData();
 
-  const value = this.productForm.value;
+    const value = this.productForm.value;
 
-  formData.append('product_Id', value.product_Id);
-  formData.append('name', value.name);
-  formData.append('description', value.description ?? '');
-  formData.append('price', value.price.toString());
-  formData.append('content', value.content ?? '');
-  formData.append('from', formatNullable(value.from, 'date'));
-  formData.append('to', formatNullable(value.to, 'date'));
-  formData.append('priceBeforeDiscount', formatNullable(value.priceBeforeDiscount));
-  formData.append('youtubeLink', value.youtubeLink ?? '');
-  formData.append('cat_Id', value.cat_Id.toString());
-  formData.append('flagWeight', value.flagWeight ? 'true' : 'false');
- formData.append('netWeight', value.netWeight .toString());
+    formData.append('product_Id', value.product_Id);
+    formData.append('name', value.name);
+    formData.append('description', value.description ?? '');
+    formData.append('price', value.price.toString());
+    formData.append('content', value.content ?? '');
+    formData.append('from', formatNullable(value.from, 'date'));
+    formData.append('to', formatNullable(value.to, 'date'));
+    formData.append('priceBeforeDiscount', formatNullable(value.priceBeforeDiscount));
+    formData.append('youtubeLink', value.youtubeLink ?? '');
+    formData.append('cat_Id', value.cat_Id.toString());
+    formData.append('flagWeight', value.flagWeight ? 'true' : 'false');
+    formData.append('netWeight', value.netWeight.toString());
 
-  this.selectedFiles.forEach((file) => {
-    formData.append('images', file);
-  });
+    this.selectedFiles.forEach((file) => {
+      formData.append('images', file);
+    });
 
     // this.selectedFiles.forEach((file) => {
     //   formData.append('images', file);
     // });
 
-console.log('Form values before sending:', this.productForm.value);
-    this.http.post(`https://ma7aba.bsite.net/api/Product/UpdateProduct/${this.prdID}`, formData, {
-    
-    headers: {
-      // لا تحدد Content-Type يدويًا لـ FormData، سيقوم Angular بتعيينه تلقائيًا مع boundary
-     // this.http.post(`https://ma7aba.bsite.net/api/Product/UpdateProduct/${this.prdID}`
-    },
+    console.log('Form values before sending:', this.productForm.value);
+    this.http.post(`https://mahabamarket.bsite.net/api/Product/UpdateProduct/${this.prdID}`, formData, {
+
+      headers: {
+        // لا تحدد Content-Type يدويًا لـ FormData، سيقوم Angular بتعيينه تلقائيًا مع boundary
+        // this.http.post(`https://mahabamarket.bsite.net/api/Product/UpdateProduct/${this.prdID}`
+      },
 
 
-    reportProgress: true, // اختياري: لمتابعة تقدم الرفع
-    responseType: 'json' // نوع الاستجابة المتوقع
-  }).subscribe({
+      reportProgress: true, // اختياري: لمتابعة تقدم الرفع
+      responseType: 'json' // نوع الاستجابة المتوقع
+    }).subscribe({
       next: () => alert('تم تحديث المنتج مع الصور'),
       error: err => console.error(err),
     });
   }
 
 
-   goBack(): void {
+  goBack(): void {
     this.location.back();
   }
 

@@ -21,10 +21,10 @@ export class UpdateCategoryComponent {
   constructor(
     private http: HttpClient,
     private route: ActivatedRoute,
-    private router: Router ,
-    private location: Location ,
+    private router: Router,
+    private location: Location,
 
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.categoryId = Number(this.route.snapshot.paramMap.get('id'));
@@ -32,11 +32,11 @@ export class UpdateCategoryComponent {
   }
 
   loadCategory(): void {
-    this.http.get<any>(`https://ma7aba.bsite.net/api/Cataegory/getbyid/${this.categoryId}`)
+    this.http.get<any>(`https://mahabamarket.bsite.net/api/Cataegory/getbyid/${this.categoryId}`)
       .subscribe({
         next: (data) => {
           this.Namecat = data.namecat;
-          this.previewUrl = `https://ma7aba.bsite.net/Category/${data.img}`;
+          this.previewUrl = `https://mahabamarket.bsite.net/Category/${data.img}`;
         },
         error: (err) => {
           console.error('Failed to load category', err);
@@ -63,7 +63,7 @@ export class UpdateCategoryComponent {
       formData.append('files', this.selectedFile); // ASP.NET will look in Request.Form.Files
     }
 
-    this.http.post(`https://ma7aba.bsite.net/api/Cataegory/UpdateCategory/${this.categoryId}`, formData)
+    this.http.post(`https://mahabamarket.bsite.net/api/Cataegory/UpdateCategory/${this.categoryId}`, formData)
       .subscribe({
         next: () => {
           alert('Category updated successfully');
@@ -75,7 +75,7 @@ export class UpdateCategoryComponent {
         }
       });
   }
-   goBack(): void {
+  goBack(): void {
     this.location.back();
   }
 }

@@ -10,23 +10,22 @@ import { Icatagory } from '../../Moduels/icatagory';
 @Component({
   selector: 'app-pagesproducts',
   standalone: true,
-  imports: [RouterLink,FormsModule,CommonModule],
+  imports: [RouterLink, FormsModule, CommonModule],
   templateUrl: './pagesproducts.component.html',
   styleUrl: './pagesproducts.component.css'
 })
 export class PagesproductsComponent {
- productslist: any []= [];
+  productslist: any[] = [];
   filterObj = {
     "item": "",
-    "catagorgsId":0,
+    "catagorgsId": 0,
     "suppliersId": 0,
     "pg": 1,
   }
 
   catList: Icatagory[] = [];
   chooseCatID: number = 0;
-  constructor(private httpclient:HttpClient , private prdService :ProductsService ,private router: Router )
-  {
+  constructor(private httpclient: HttpClient, private prdService: ProductsService, private router: Router) {
 
   }
   // ngOnChanges(): void {
@@ -39,42 +38,41 @@ export class PagesproductsComponent {
     console.log(this.productslist);
   }
   onPrevious() {
-    if(this.filterObj.pg>1)
-    {
-      this.filterObj.pg --;
+    if (this.filterObj.pg > 1) {
+      this.filterObj.pg--;
       this.filetrCandidates('');
     }
-  
+
   }
   onNext() {
-    this.filterObj.pg ++;
+    this.filterObj.pg++;
     this.filetrCandidates('');
   }
 
-  filetrCandidates(hany:any) {
-        this.filterObj.catagorgsId = this.chooseCatID;
+  filetrCandidates(hany: any) {
+    this.filterObj.catagorgsId = this.chooseCatID;
     this.httpclient.get
-    (`https://ma7aba.bsite.net/api/Product/Num?catagorgsId=${this.filterObj.catagorgsId}&suppliersId=${this.filterObj.suppliersId}
+      (`https://mahabamarket.bsite.net/api/Product/Num?catagorgsId=${this.filterObj.catagorgsId}&suppliersId=${this.filterObj.suppliersId}
     &pg=${this.filterObj.pg}&item=${this.filterObj.item}`)
-    .subscribe((res:any)=> {
-      this.productslist = res;
-      // console.log(this.filterObj);
-      // console.log(this.productslist);
-      // console.log(this.filterObj);
+      .subscribe((res: any) => {
+        this.productslist = res;
+        // console.log(this.filterObj);
+        // console.log(this.productslist);
+        // console.log(this.filterObj);
 
 
-    })
+      })
   }
 
 
- loadCategories(): void {
+  loadCategories(): void {
     this.prdService.getallcat().subscribe({
       next: (categories) => {
         this.catList = categories;
         // إضافة خيار "All Categories" إذا لم يكن موجوداً
         if (!this.catList.some((c) => c.cat_Id === 0)) {
-          this.catList.unshift({ cat_Id: 1000, namecat: ' العروض' ,img:"offer.png"});
-          this.catList.unshift({ cat_Id: 0, namecat: 'كل المنتجات' ,img:"554.jpg"});
+          this.catList.unshift({ cat_Id: 1000, namecat: ' العروض', img: "offer.png" });
+          this.catList.unshift({ cat_Id: 0, namecat: 'كل المنتجات', img: "554.jpg" });
 
         }
       },
@@ -82,25 +80,25 @@ export class PagesproductsComponent {
     });
   }
 
-getSelCat(): void {
+  getSelCat(): void {
     this.filterObj.pg = 1; // إعادة تعيين الصفحة إلى 1
     this.filetrCandidates('');
   }
 
-delete(id: number) {
-  if (confirm("هل أنت متأكد أنك تريد حذف هذا المنتج؟")) {
-    this.prdService.deleteProduct(id).subscribe({
-      next: () => {
-        alert("تم حذف المنتج بنجاح");
-        this.filetrCandidates(''); // إعادة تحميل البيانات
-      },
-      error: (err: Error) => {
-        alert("حدث خطأ أثناء الحذف: " + err.message);
-        console.error(err);
-      }
-    });
+  delete(id: number) {
+    if (confirm("هل أنت متأكد أنك تريد حذف هذا المنتج؟")) {
+      this.prdService.deleteProduct(id).subscribe({
+        next: () => {
+          alert("تم حذف المنتج بنجاح");
+          this.filetrCandidates(''); // إعادة تحميل البيانات
+        },
+        error: (err: Error) => {
+          alert("حدث خطأ أثناء الحذف: " + err.message);
+          console.error(err);
+        }
+      });
+    }
   }
-}
 
 
 

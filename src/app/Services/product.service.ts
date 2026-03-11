@@ -64,17 +64,17 @@ export class ProductsService implements OnInit {
 
     this.httpOption = {
       headers: new HttpHeaders({
-       'Content-Type': 'application/json',
-       // Authorization: `Bearer` + ' ' + this.storageservice.getToken(),
-       'CompanyName' : 'garastest',
-        'UserId' : 1 ,
-        'UserToken':'Vbi5cD%2fLy5OAHIdiorY%2fZA%3d%3d',
+        'Content-Type': 'application/json',
+        // Authorization: `Bearer` + ' ' + this.storageservice.getToken(),
+        'CompanyName': 'garastest',
+        'UserId': 1,
+        'UserToken': 'Vbi5cD%2fLy5OAHIdiorY%2fZA%3d%3d',
       }),
     };
 
     this.CountSubject = new BehaviorSubject<number>(this.countcart);
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   private handleError(error: HttpErrorResponse) {
     // Generic Error handler
@@ -107,31 +107,31 @@ export class ProductsService implements OnInit {
   }
   getallcat(): Observable<Icatagory[]> {
     return this.httpclient.get<Icatagory[]>(
-      'https://ma7aba.bsite.net/api/Cataegory/Index'
+      'https://mahabamarket.bsite.net/api/Cataegory/Index'
     );
   }
   getProductByID(prdID: number): Observable<Iproduct> {
     return this.httpclient.get<Iproduct>(
-      `https://ma7aba.bsite.net/api/Product/Details/${prdID}`
+      `https://mahabamarket.bsite.net/api/Product/Details/${prdID}`
     );
   }
 
-// getProduct(prdID: number): Observable<Iproducts> {
-//     return this.httpclient.get<Iproducts>(
-//       `https://ma7aba.bsite.net/api/Product/Details/${prdID}`
-//     );
-//   }
+  // getProduct(prdID: number): Observable<Iproducts> {
+  //     return this.httpclient.get<Iproducts>(
+  //       `https://mahabamarket.bsite.net/api/Product/Details/${prdID}`
+  //     );
+  //   }
 
   addProduct(newPrd: Iproduct): Observable<Iproduct> {
     return this.httpclient
       .post<Iproduct>(
-        `https://ma7aba.bsite.net/api/Product/adding `,
+        `https://mahabamarket.bsite.net/api/Product/adding `,
         JSON.stringify(newPrd),
         this.httpOption
       )
       .pipe(retry(2), catchError(this.handleError));
   }
- 
+
 
   // addmessage(newmessage: IMessage): Observable<IMessage> {
   //   return this.httpclient
@@ -147,7 +147,7 @@ export class ProductsService implements OnInit {
   updateProduct(prdID: number, UpdatedPrd: Iproduct): Observable<Iproduct> {
     return this.httpclient
       .put<Iproduct>(
-        `https://ma7aba.bsite.net/api/Product/edite/${prdID} `,
+        `https://mahabamarket.bsite.net/api/Product/edite/${prdID} `,
         JSON.stringify(UpdatedPrd),
         this.httpOption
       )
@@ -155,13 +155,13 @@ export class ProductsService implements OnInit {
   }
   deleteProduct(prdID: number): Observable<any> {
     return this.httpclient
-      .delete<any>(`https://ma7aba.bsite.net/api/Product/Delete/${prdID} `)
+      .delete<any>(`https://mahabamarket.bsite.net/api/Product/Delete/${prdID} `)
       .pipe(retry(2), catchError(this.handleError));
   }
 
- deletecat(prdID: number): Observable<any> {
+  deletecat(prdID: number): Observable<any> {
     return this.httpclient
-      .delete<any>(`https://ma7aba.bsite.net/api/Cataegory/Delete/${prdID}`)
+      .delete<any>(`https://mahabamarket.bsite.net/api/Cataegory/Delete/${prdID}`)
       .pipe(retry(2), catchError(this.handleError));
   }
 
@@ -229,7 +229,7 @@ export class ProductsService implements OnInit {
   // addToCart(Id: number): Observable<any> {
   //   debugger;
   //   return this.httpclient.post<any>(
-    
+
   //     `https://localhost:44380/api/Cart/Additem?Product_Id=${Id}`, Id, this.httpOption
   //   );
   // }
@@ -237,7 +237,7 @@ export class ProductsService implements OnInit {
   addToCart(Id: number): Observable<any> {
     debugger;
     return this.httpclient.post<any>(
-    
+
       `https://jala44.bsite.net/api/Cart/Additem?Product_Id=${Id}`, Id
     );
   }
